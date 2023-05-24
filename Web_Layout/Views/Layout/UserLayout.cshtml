@@ -1,0 +1,83 @@
+﻿
+@model IEnumerable<Web_Layout.Models.Sach>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+    @* Chèn link css template có sẵn *@
+    <link href="~/Content/cssUserLayout/style.css" rel="stylesheet" /> 
+</head>
+<body>
+    <div>
+        @RenderBody();
+    </div>
+    <div id="background">
+        <div id="page">
+            <div id="header">
+                <div id="logo">
+                    <a href="index.html"><img src="~/images/logo_sach.png" alt="LOGO" height="112" width="118"></a>
+                </div>
+                <div id="navigation">
+                    <ul>
+                        <li class="selected">
+                            <a href="/">Trang chủ</a>
+                        </li>
+                        <li>
+                            <a href="about.html">Giới thiệu</a>
+                        </li>
+                        <li>
+                            <a href="/?Machude=1">Sách Tin học</a>
+                        </li>
+                        <li>
+                            <a href="/?Machude=1">Sách Tự nhiên</a>
+                        </li>
+                        <li>
+                            <a href="/?Machude=2">Sách Văn học </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div id="contents">
+                <div id="adbox">
+                    <img src="~/images/banner_sach.bmp" alt="Img" height="100" width="800">
+                    <h1>Chào mừng bạn đến với Website của chúng tôi!</h1>
+                    @*<p>
+                        Nếu bạn là một người yêu thích đọc sách và muốn làm công việc gì đó với tình yêu đó của bạn. Hãy đến với website của chúng tôi để thỏa mãn đam mê
+                    </p>*@
+                </div>               
+                <h3>Danh mục sách</h3>
+                 @{
+                     
+                     int i = 0;}
+                @foreach (var item in Model)
+                {
+                    i++;
+               <div id="Sanpham">                        
+               <span id="Anhbia"><img 
+               src="@Url.Content("~/HinhanhSP/"+item.Anhbia)" width="100" 
+                                      height="150" /> 
+                        </span> <br />
+                        <span id="Tensach">@item.Tensach</span> <br />
+                        <span id="Giaban">@item.Giaban</span>
+                   <p></p>
+                   <div class="col-xs-12 col-md-6">
+                       <a class="btn btn-success" href="@Url.Action("AddToCart","Cart", new {Masach1= item.Masach})">Dat hang</a>
+                   </div>
+               </div>
+                    if (i % 3 == 0)
+                    {
+                        <div style="clear:both;"></div>
+                    }
+                }
+            </div>
+        </div>
+           </div>
+    <div id="footer">
+        <p>
+            © 2023 by Nguyễn Thị Mười Phương
+        </p>
+    </div>   
+</body>
+</html>

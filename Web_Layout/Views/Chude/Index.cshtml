@@ -1,0 +1,78 @@
+﻿@model IEnumerable<Web_Layout.Models.Chude>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+    @* Chèn link css template có sẵn *@
+    <link href="~/Content/cssUserLayout/style.css" rel="stylesheet" />
+</head>
+<body>
+      <div id="background">
+          <div id="page">
+              <div id="header">
+                  <div id="navigation">
+                      <ul>
+                          <div class="navbar-collapse collapse">
+                              <ul class="nav navbar-nav">
+                                  <li>@Html.ActionLink("Home", "Index", "Admin")</li>
+                                  <li>@Html.ActionLink("Quản lý chủ đề", "Index", "Chude")</li>
+                                  <li>@Html.ActionLink("Quản lý sách", "Index", "Sach")</li>
+                              </ul>
+                          </div>
+
+                      </ul>
+                  </div>
+              </div>
+              <br />
+              <br />
+              <div id="contents">
+                  <br />
+                  <br />
+                  <p>
+                      @Html.ActionLink("Create New", "Create")
+                  </p>
+
+                  <table class="table">
+                      <tr>
+                          <th>
+                              @Html.DisplayNameFor(model => model.Machude)
+                          </th>
+                          <th>
+                              @Html.DisplayNameFor(model => model.Tenchude)
+                          </th>
+                          <th></th>
+                      </tr>
+
+                      @foreach (var item in Model)
+                      {
+                          <tr>
+                              <td>
+                                  @Html.DisplayFor(modelItem => item.Machude)
+                              </td>
+                              <td>
+                                  @Html.DisplayFor(modelItem => item.Tenchude)
+                              </td>
+                              <td>
+                                  @Html.ActionLink("Edit", "Edit", new { id = item.Machude }) |
+                                  @Html.ActionLink("Details", "Details", new { id = item.Machude }) |
+                                  @Html.ActionLink("Delete", "Delete", new { id = item.Machude })
+                              </td>
+                          </tr>
+                      }
+
+                  </table>
+              </div>
+          </div>
+    </div>
+    <div id="footer">
+        <p>
+            © 2023 by Nguyễn Thị Mười Phương
+        </p>
+    </div>
+</body>
+</html>
+
+
+

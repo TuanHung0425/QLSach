@@ -1,0 +1,78 @@
+﻿@model IEnumerable <Web_Layout.Models.CartItem>
+@{
+    ViewBag.Title = "Index";
+    
+}
+
+@if(Model==null)
+{
+<p class="text-info text-center">
+    Gio hang cua ban rong!
+</p>
+}
+else{
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Masach)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Tensach)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Giaban)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Anhbia)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Soluong)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Thanhtien)
+        </th>
+    </tr>
+    @foreach(var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Masach)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Tensach)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Giaban)
+                    </td>
+                    <td>
+                        <img src="@Url.Content("~/HinhanhSP/"+item.Anhbia)" width="100" height="120" />
+                    </td>
+                    <td>
+                        @using (Html.BeginForm("CapnhatGiohang", "Cart", new { Masach1 = item.Masach }))
+                        {
+                            <input type="hidden" name="Masach" value="@item.Soluong" />
+                            <input type="number" min=" 1" step="1" name="txtsoluong" value="@item.Soluong" />
+                            <button type="submit" class="btn-default btn-primary btn-sm"> Capnhat</button>
+                        }
+                    </td>
+                    <td>
+                        @item.Giaban.ToString("#,##0").Replace(',', '.')VND
+                    </td>
+                    <td>
+                        <a href="@Url.Action("RemoveItem", new {Masach1=item.Masach})"
+                           onclick="return confirm('Ban co muon xoa san pham nay?');"
+                           class="btn btn-danger btn-sm"> Xoa</a>
+                    </td>
+                </tr>
+            }
+<tr>
+    <td></td>
+    <td class="text-right">Tong so luong</td>
+    <td>@Model.Sum(m => m.Soluong)</td>
+    <td class="text-right">Tong thanh tien</td>
+    <td>@Model.Sum(m => m.Thanhtien).ToString("#,##0").Replace(',','.') VND</td>
+</tr>
+</table>
+  <div class="col-xs-12 col-md-6"><a class="btn btn-success" href="@Url.Action("Index","Thanhtoan")"> Thanh Toan</a></div>     
+}
+
